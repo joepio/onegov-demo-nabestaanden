@@ -2,8 +2,8 @@
 
 > _Van chaos naar regie: één overheidsoverzicht voor nabestaanden._
 
-Voor de [OneGov AI hackathon](https://alkem.io/onegov-hackathon) zijn Vincent van Beek en ik aan de
-slag om een prototype te bouwen voor een [specifieke challenge](https://github.com/govtechnl/onegov2-inwoner-centraal):
+Voor de [OneGov AI hackathon](https://alkem.io/onegov-hackathon) is team Umbrella Company (Vincent van Beek, Joep Meindertsma, Tamara Vecic, Y Sugiyama en Roel Susan) aan de
+slag gegaan om een prototype te bouwen voor een [specifieke challenge](https://github.com/govtechnl/onegov2-inwoner-centraal):
 
 > **How can we help bereaved partners get a complete, proactive, personalised view of their rights
 > and obligations across the entire government — without making them chase it themselves?**
@@ -35,8 +35,8 @@ _(draait via een tunnel naar mijn laptop — kan tijdelijk offline zijn)_
 - **Integratie** met de bestaande **Overzicht-pagina** (prominente banner + de open taken) en de
   **sidebar** (tweede menu-item, met badge).
 
-| Briefdetail (met pijnpunt-signalering) | Mijn berichten |
-|---|---|
+| Briefdetail (met pijnpunt-signalering)       | Mijn berichten                               |
+| -------------------------------------------- | -------------------------------------------- |
 | ![Briefdetail](screenshots/brief-detail.png) | ![Mijn berichten](screenshots/berichten.png) |
 
 ## Hoe het werkt
@@ -99,19 +99,19 @@ curl -X PATCH https://<tunnel>/taken/<uuid> -H 'content-type: application/json' 
 
 De brief verschijnt **direct** in elke open app (via de live-update). Belangrijkste velden:
 
-| Veld | Type | Toelichting |
-|---|---|---|
-| `titel.nl` | string | **Verplicht.** Onderwerp van de brief. |
-| `organisatie` | string | `gemeente`, `belastingdienst`, `toeslagen`, `svb`, `cak`, `uwv`, `rdw`, `waterschap`, `cjib`, `duo`, `rvo`, `kvk`. |
-| `briefType` | enum | `informatiebrief` · `actiebrief` · `factuur` · `aanmaning`. |
-| `actieNodig` | boolean | Moet de nabestaande zelf iets doen? Bepaalt de sectie + de deadline-badge. |
-| `automatisch` | boolean | `true` → "Automatisch geregeld" (alleen zinvol als `actieNodig=false`). |
-| `deadline` | ISO 8601 | Bv. `2026-07-15T23:59:59+02:00`. |
-| `ontvangen` | `YYYY-MM-DD` | Datum binnenkomst. |
-| `toelichting.nl` | string | Wat er gevraagd wordt. |
-| `leidtTotZaak` | string | Naam van de zaak waartoe de brief leidt. |
-| `aanhef` / `geadresseerde` / `adres` | — | Voor de briefdetailpagina (en de pijnpunt-signalering). |
-| `uitvoering.canonicalUrl` | URL | Handoff-link naar de afhandeling. |
+| Veld                                 | Type         | Toelichting                                                                                                        |
+| ------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `titel.nl`                           | string       | **Verplicht.** Onderwerp van de brief.                                                                             |
+| `organisatie`                        | string       | `gemeente`, `belastingdienst`, `toeslagen`, `svb`, `cak`, `uwv`, `rdw`, `waterschap`, `cjib`, `duo`, `rvo`, `kvk`. |
+| `briefType`                          | enum         | `informatiebrief` · `actiebrief` · `factuur` · `aanmaning`.                                                        |
+| `actieNodig`                         | boolean      | Moet de nabestaande zelf iets doen? Bepaalt de sectie + de deadline-badge.                                         |
+| `automatisch`                        | boolean      | `true` → "Automatisch geregeld" (alleen zinvol als `actieNodig=false`).                                            |
+| `deadline`                           | ISO 8601     | Bv. `2026-07-15T23:59:59+02:00`.                                                                                   |
+| `ontvangen`                          | `YYYY-MM-DD` | Datum binnenkomst.                                                                                                 |
+| `toelichting.nl`                     | string       | Wat er gevraagd wordt.                                                                                             |
+| `leidtTotZaak`                       | string       | Naam van de zaak waartoe de brief leidt.                                                                           |
+| `aanhef` / `geadresseerde` / `adres` | —            | Voor de briefdetailpagina (en de pijnpunt-signalering).                                                            |
+| `uitvoering.canonicalUrl`            | URL          | Handoff-link naar de afhandeling.                                                                                  |
 
 Volledige documentatie en alle endpoints: **[`backend/README.md`](backend/README.md)**.
 
@@ -134,18 +134,21 @@ screenshots/
 ## Hoe dit de challenge raakt
 
 **✅ Moet**
+
 - Data **bij de bron** via het [MijnTaken-contract](https://github.com/vng-realisatie/mijn-taken-api) (provider-agnostisch, Common Ground).
 - **Meerdere organisaties** in één overzicht — 7 in de demo: Gemeente, Belastingdienst, Dienst Toeslagen, SVB, CAK, RDW, Waterschap.
 - Werkt met de **aangeleverde synthetische data** (golden fixture Truus/Cees).
 - Aantoonbaar bruikbaar: één plek, prioriteit op urgentie, geruststelling over wat al geregeld is.
 
 **⭐ Zou moeten**
+
 - **Proactief**: ná de BRP-mutatie bundelt de overheid de post; de nabestaande hoeft niets te zoeken. "X zaken al automatisch geregeld" maakt dat zichtbaar.
 - **Laag doenvermogen / taalvaardigheid**: rustige taal, per item meteen "moet ik iets doen?", urgentie eerst, geen jargon.
 - **Open source** met **herbruikbare componenten** (gedeelde rij/badge/tokens; MijnTaken-datavorm).
 - **Volledigheid · toon · timing**: deadlines + brieven die later komen (bv. erfbelasting); signalering van adresserings-pijnpunten (gericht aan _"de erven"_, bezorgd op het verzorgingstehuis-adres).
 
 **✨ Kan**
+
 - Aansluiting op **MijnServices / MijnOverheid**-stijl; **handoff** naar bestaande loketten of Wallet via `uitvoering.canonicalUrl`.
 - **Modulair & schaalbaar**: het `brief → taak → zaak`-model werkt ook voor andere levensgebeurtenissen (scheiding, pensionering).
 
@@ -158,7 +161,8 @@ screenshots/
 
 ## Credits
 
-Gemaakt door **Vincent van Beek** en **Joep Meindertsma** voor de OneGov AI hackathon.
+Gemaakt door Team Umbrella voor de OneGov AI hackathon.
+Coding door Joep Meindertsma, gebaseerd op figma designs
 Challenge & synthetische data: [govtechnl/onegov2-inwoner-centraal](https://github.com/govtechnl/onegov2-inwoner-centraal)
 (Aanpak Levensgebeurtenissen, ICTU / BZK). De UI bouwt voort op de VNG MijnServices demo en het
 NL Design System.
