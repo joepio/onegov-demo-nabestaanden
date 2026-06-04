@@ -1,0 +1,232 @@
+<div style="font-family: var(--font-sans); background: var(--color-background-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; border: 0.5px solid var(--color-border-tertiary);">
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Interactief prototype Nabestaande dossier — overzicht met belangrijke documenten, taken op urgentie, voorbereide taken, een volledig takenoverzicht en taakdetails.</h2>
+
+<div style="background:#154273; color:#fff; padding:12px 20px; display:flex; align-items:center; gap:12px;">
+  <span style="font-weight:500; font-size:18px; letter-spacing:-0.2px;">MijnOverheid</span>
+  <span style="margin-left:auto; font-size:13px; display:flex; align-items:center; gap:8px;"><i class="ti ti-user" aria-hidden="true"></i> Truus de Vries-Bakker</span>
+</div>
+
+<div style="display:flex; min-height:560px;">
+
+  <nav style="width:210px; background:#fff; border-right:0.5px solid var(--color-border-tertiary); padding:12px 0; flex-shrink:0;">
+    <a style="display:flex; align-items:center; gap:10px; padding:10px 18px; font-size:14px; color:var(--color-text-secondary); text-decoration:none;"><i class="ti ti-home" aria-hidden="true"></i> Home</a>
+    <a style="display:flex; align-items:center; gap:10px; padding:10px 18px; font-size:14px; color:var(--color-text-secondary); text-decoration:none;"><i class="ti ti-inbox" aria-hidden="true"></i> Berichtenbox</a>
+    <a style="display:flex; align-items:center; gap:10px; padding:10px 18px; font-size:14px; color:var(--color-text-secondary); text-decoration:none;"><i class="ti ti-checkbox" aria-hidden="true"></i> Mijn taken</a>
+    <a onclick="ga('overview')" style="cursor:pointer; display:flex; align-items:center; justify-content:space-between; padding:10px 18px; font-size:14px; color:#154273; text-decoration:none; background:#e6eef5; border-left:3px solid #154273; font-weight:500;">
+      <span style="display:flex; align-items:center; gap:10px;"><i class="ti ti-folder" aria-hidden="true"></i> Nabestaande dossier</span>
+      <span id="navBadge" style="background:#d52b1e; color:#fff; font-size:11px; min-width:18px; height:18px; border-radius:9px; display:flex; align-items:center; justify-content:center; padding:0 5px;">2</span>
+    </a>
+    <a style="display:flex; align-items:center; gap:10px; padding:10px 18px; font-size:14px; color:var(--color-text-secondary); text-decoration:none;"><i class="ti ti-message" aria-hidden="true"></i> MijnGesprekken</a>
+    <a style="display:flex; align-items:center; gap:10px; padding:10px 18px; font-size:14px; color:var(--color-text-secondary); text-decoration:none;"><i class="ti ti-settings" aria-hidden="true"></i> Instellingen</a>
+  </nav>
+
+  <main style="flex:1; padding:24px 28px; min-width:0;">
+
+    <section id="view-overview">
+      <p style="font-size:13px; color:var(--color-text-secondary); margin:0 0 4px;">Dossier voor Cees de Vries (overleden 14 mei 2026)</p>
+      <h1 style="font-size:24px; font-weight:500; color:#154273; margin:0 0 4px;">Nabestaande dossier</h1>
+      <p style="font-size:15px; color:var(--color-text-secondary); margin:0 0 20px;">Een overzicht van alles wat er geregeld moet worden — wij sorteren het voor u op urgentie.</p>
+
+      <div style="background:#fdf0ef; border:0.5px solid #d52b1e; border-left:4px solid #d52b1e; padding:14px 16px; display:flex; gap:12px; align-items:flex-start; margin-bottom:24px;">
+        <i class="ti ti-alert-triangle" aria-hidden="true" style="color:#d52b1e; font-size:20px; margin-top:1px;"></i>
+        <div>
+          <p style="margin:0 0 2px; font-weight:500; font-size:14px; color:#9b1b12;">1 taak moet u deze week oppakken</p>
+          <p style="margin:0; font-size:13px; color:#9b1b12;">Binnen 2 weken verloopt: <span style="font-weight:500;">Aanmaning waterschapsbelasting</span> (Waterschap, vóór 16 juni 2026 — over 12 dagen).</p>
+        </div>
+      </div>
+
+      <h2 style="font-size:18px; font-weight:500; color:#154273; margin:0 0 4px;">Belangrijke documenten</h2>
+      <p style="font-size:14px; color:var(--color-text-secondary); margin:0 0 10px;">Informatie en stukken rondom het overlijden van Cees.</p>
+      <div style="border:0.5px solid var(--color-border-tertiary); border-radius:var(--border-radius-md); overflow:hidden; margin-bottom:28px;">
+        <button onclick="alert('Demo: opent informatie over het condoleancebericht van het CAK.')" class="taakrow" style="width:100%; text-align:left; background:none; border:none; border-bottom:0.5px solid var(--color-border-tertiary); padding:14px 16px; cursor:pointer; display:flex; gap:14px; align-items:center;"><i class="ti ti-mail-heart" aria-hidden="true" style="color:#154273; font-size:20px;"></i><span style="flex:1;"><span style="color:#185fa5; font-weight:500; font-size:14px;">Condoleanceberichten van organisaties</span><br><span style="color:var(--color-text-secondary); font-size:12px;">Berichten die geen actie vragen, ter informatie</span></span><i class="ti ti-chevron-right" aria-hidden="true" style="color:var(--color-text-tertiary);"></i></button>
+        <button onclick="alert('Demo: opent een overzicht van documenten en bewijsstukken.')" class="taakrow" style="width:100%; text-align:left; background:none; border:none; border-bottom:0.5px solid var(--color-border-tertiary); padding:14px 16px; cursor:pointer; display:flex; gap:14px; align-items:center;"><i class="ti ti-file-text" aria-hidden="true" style="color:#154273; font-size:20px;"></i><span style="flex:1;"><span style="color:#185fa5; font-weight:500; font-size:14px;">Akte van overlijden en verklaring van erfrecht</span><br><span style="color:var(--color-text-secondary); font-size:12px;">Officiële documenten om te bewaren en te delen</span></span><i class="ti ti-chevron-right" aria-hidden="true" style="color:var(--color-text-tertiary);"></i></button>
+        <button onclick="alert('Demo: opent uitleg over rechten zoals Anw en nabestaandenpensioen.')" class="taakrow" style="width:100%; text-align:left; background:none; border:none; border-bottom:0.5px solid var(--color-border-tertiary); padding:14px 16px; cursor:pointer; display:flex; gap:14px; align-items:center;"><i class="ti ti-info-circle" aria-hidden="true" style="color:#154273; font-size:20px;"></i><span style="flex:1;"><span style="color:#185fa5; font-weight:500; font-size:14px;">Waar heb ik mogelijk recht op?</span><br><span style="color:var(--color-text-secondary); font-size:12px;">Nabestaandenuitkering (Anw), pensioen, toeslagen</span></span><i class="ti ti-chevron-right" aria-hidden="true" style="color:var(--color-text-tertiary);"></i></button>
+        <button onclick="alert('Demo: opent veelgestelde vragen voor nabestaanden.')" class="taakrow" style="width:100%; text-align:left; background:none; border:none; padding:14px 16px; cursor:pointer; display:flex; gap:14px; align-items:center;"><i class="ti ti-help-circle" aria-hidden="true" style="color:#154273; font-size:20px;"></i><span style="flex:1;"><span style="color:#185fa5; font-weight:500; font-size:14px;">Veelgestelde vragen</span><br><span style="color:var(--color-text-secondary); font-size:12px;">Antwoorden op veelvoorkomende vragen na een overlijden</span></span><i class="ti ti-chevron-right" aria-hidden="true" style="color:var(--color-text-tertiary);"></i></button>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:28px; align-items:start;">
+        <section style="background:#fff; border:0.5px solid var(--color-border-tertiary); border-top:3px solid #d52b1e; border-radius:0 0 var(--border-radius-md) var(--border-radius-md); padding:14px;">
+          <div style="display:flex; align-items:center; gap:7px; margin-bottom:12px;"><i class="ti ti-flag-3" aria-hidden="true" style="color:#d52b1e; font-size:17px;"></i><span style="font-weight:500; font-size:14px;">Hoge prioriteit</span><span style="margin-left:auto; font-size:13px; color:var(--color-text-secondary);">2</span></div>
+          <p style="font-size:12px; color:var(--color-text-secondary); margin:0 0 12px;">Een deadline binnen enkele weken — pak deze als eerste op.</p>
+          <div style="font-size:13px; display:flex; flex-direction:column; gap:9px;">
+            <button onclick="ga('water')" class="taakrow" style="text-align:left; background:none; border:none; border-bottom:0.5px solid var(--color-border-tertiary); padding:0 0 9px; cursor:pointer; display:flex; gap:8px; align-items:flex-start;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#d52b1e;margin-top:5px;flex-shrink:0;"></span>
+              <span style="flex:1;"><span style="color:#154273; font-weight:500;">Aanmaning waterschapsbelasting betalen</span><br><span style="color:var(--color-text-tertiary); font-size:12px;">Waterschap · vóór 16 juni · <span style="color:#d52b1e;">over 12 dagen</span> · ~10 min</span></span>
+              <i class="ti ti-chevron-right" aria-hidden="true" style="color:var(--color-text-tertiary);margin-top:2px;"></i>
+            </button>
+            <button onclick="ga('cak')" class="taakrow" style="text-align:left; background:none; border:none; padding:0; cursor:pointer; display:flex; gap:8px; align-items:flex-start;">
+              <span style="width:8px;height:8px;border-radius:50%;background:#ef9f27;margin-top:5px;flex-shrink:0;"></span>
+              <span style="flex:1;"><span style="color:#154273; font-weight:500;">Eindafrekening eigen bijdrage Wlz betalen</span><br><span style="color:var(--color-text-tertiary); font-size:12px;">CAK · vóór 10 juli · over 36 dagen · ~15 min</span></span>
+              <i class="ti ti-chevron-right" aria-hidden="true" style="color:var(--color-text-tertiary);margin-top:2px;"></i>
+            </button>
+          </div>
+        </section>
+
+        <section style="background:#fff; border:0.5px solid var(--color-border-tertiary); border-top:3px solid #39870c; border-radius:0 0 var(--border-radius-md) var(--border-radius-md); padding:14px;">
+          <div style="display:flex; align-items:center; gap:7px; margin-bottom:8px;"><i class="ti ti-robot" aria-hidden="true" style="color:#39870c; font-size:17px;"></i><span style="font-weight:500; font-size:14px;">Voorbereid door ons</span><span id="prepCount" style="margin-left:auto; font-size:13px; color:var(--color-text-secondary);">2</span></div>
+          <p style="font-size:12px; color:var(--color-text-secondary); margin:0 0 12px;">Wij hebben dit alvast ingevuld. Controleren en goedkeuren is genoeg.</p>
+          <div style="font-size:13px; display:flex; flex-direction:column; gap:9px;">
+            <button id="rowZorg" onclick="ga('zorg')" class="taakrow" style="text-align:left; background:#f3f8ee; border:0.5px solid #cfe3bd; border-radius:var(--border-radius-md); padding:9px 10px; cursor:pointer; display:flex; gap:8px; align-items:flex-start;">
+              <i class="ti ti-circle-check" aria-hidden="true" style="color:#39870c;margin-top:1px;"></i>
+              <span style="flex:1;"><span style="color:#154273; font-weight:500;">Zorgtoeslag stopzetten</span><br><span style="color:var(--color-text-tertiary); font-size:12px;">Toeslagen · klaargezet · ~2 min</span></span>
+            </button>
+            <button onclick="ga('contact')" class="taakrow" style="text-align:left; background:#f3f8ee; border:0.5px solid #cfe3bd; border-radius:var(--border-radius-md); padding:9px 10px; cursor:pointer; display:flex; gap:8px; align-items:flex-start;">
+              <i class="ti ti-circle-check" aria-hidden="true" style="color:#39870c;margin-top:1px;"></i>
+              <span style="flex:1;"><span style="color:#154273; font-weight:500;">Contactpersoon doorgeven</span><br><span style="color:var(--color-text-tertiary); font-size:12px;">Belastingdienst · klaargezet · ~2 min</span></span>
+            </button>
+          </div>
+        </section>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+        <button onclick="var t=document.getElementById('tl'); var c=document.getElementById('tlchev'); if(t.style.display==='none'){t.style.display='flex';c.className='ti ti-chevron-up';}else{t.style.display='none';c.className='ti ti-chevron-down';}" style="background:none; border:none; cursor:pointer; padding:0; display:flex; align-items:center; gap:8px;"><h2 style="font-size:18px; font-weight:500; color:#154273; margin:0;">Wat komt er nog aan</h2><i id="tlchev" class="ti ti-chevron-up" aria-hidden="true" style="color:var(--color-text-secondary);"></i></button>
+        <button onclick="ga('volledig')" class="taakrow" style="margin-left:auto; background:none; border:0.5px solid var(--color-border-secondary); border-radius:var(--border-radius-md); padding:7px 13px; font-size:13px; cursor:pointer; display:flex; align-items:center; gap:6px; color:#154273;">Volledig overzicht <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+      </div>
+
+      <div id="tl" style="display:flex; flex-direction:column; gap:8px;">
+        <p style="font-size:12px; color:var(--color-text-secondary); margin:0 0 6px; display:flex; gap:14px;">
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:50%;background:#d52b1e;"></span> Urgent</span>
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:50%;background:#ef9f27;"></span> Belangrijk, tijd genoeg</span>
+          <span style="display:flex;align-items:center;gap:5px;"><span style="width:9px;height:9px;border-radius:50%;background:#888780;"></span> Geen haast</span>
+        </p>
+        <div style="position:relative; padding-left:20px; border-left:2px solid var(--color-border-secondary); display:flex; flex-direction:column; gap:18px;">
+          <div style="position:relative;"><span style="position:absolute; left:-26px; top:3px; width:11px; height:11px; border-radius:50%; background:#d52b1e; border:2px solid #fff;"></span><div style="font-size:12px; font-weight:500; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px;">Deze maand · juni 2026</div><div style="font-size:14px; color:#154273; font-weight:500;">Aanmaning waterschapsbelasting</div><div style="font-size:12px; color:var(--color-text-secondary);">Waterschap · vóór 16 juni · <span style="color:#d52b1e;">over 12 dagen</span></div></div>
+          <div style="position:relative;"><span style="position:absolute; left:-26px; top:3px; width:11px; height:11px; border-radius:50%; background:#ef9f27; border:2px solid #fff;"></span><div style="font-size:12px; font-weight:500; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px;">Juli 2026</div><div style="font-size:14px; color:#154273; font-weight:500;">Eindafrekening eigen bijdrage Wlz</div><div style="font-size:12px; color:var(--color-text-secondary);">CAK · vóór 10 juli · over 36 dagen</div></div>
+          <div style="position:relative;"><span style="position:absolute; left:-26px; top:3px; width:11px; height:11px; border-radius:50%; background:#ef9f27; border:2px solid #fff;"></span><div style="font-size:12px; font-weight:500; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px;">Januari 2027</div><div style="font-size:14px; color:#154273; font-weight:500;">Aangifte erfbelasting indienen</div><div style="font-size:12px; color:var(--color-text-secondary);">Belastingdienst · vóór 14 januari · belangrijk, ruim de tijd</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-water" style="display:none;"></section>
+    <section id="view-cak" style="display:none;"></section>
+    <section id="view-zorg" style="display:none;"></section>
+    <section id="view-contact" style="display:none;"></section>
+    <section id="view-volledig" style="display:none;"></section>
+
+  </main>
+</div>
+
+<div id="footer" style="background:#154273; color:#fff; padding:24px 28px; display:none;">
+  <div style="font-weight:500; font-size:16px; margin-bottom:14px; display:flex; align-items:center; gap:8px;"><i class="ti ti-headset" aria-hidden="true"></i> Hulp nodig?</div>
+  <p id="footerLine" style="font-size:14px; margin:0 0 6px; opacity:0.95;"></p>
+  <p style="font-size:14px; margin:0; opacity:0.95;">Of stel uw vraag via de <span style="text-decoration:underline;">digitale assistent</span> in MijnOverheid.</p>
+</div>
+
+<div id="digidModal" style="display:none; position:absolute; inset:0; background:rgba(0,0,0,0.45); align-items:center; justify-content:center; z-index:10;">
+  <div style="background:#fff; border-radius:var(--border-radius-lg); padding:24px; width:360px; max-width:90%; text-align:center;">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;"><span style="font-weight:500; font-size:15px; color:#154273; display:flex; align-items:center; gap:8px;"><span style="background:#154273;color:#fff;font-size:12px;font-weight:500;padding:2px 7px;border-radius:3px;letter-spacing:0.5px;">DigiD</span> Uitnodigen</span><button onclick="document.getElementById('digidModal').style.display='none'" aria-label="Sluiten" style="background:none; border:none; cursor:pointer; font-size:20px; color:var(--color-text-secondary); padding:0;"><i class="ti ti-x"></i></button></div>
+    <p style="font-size:13px; color:var(--color-text-secondary); margin:0 0 18px; text-align:left;">Laat de genodigde deze QR-code scannen met de DigiD-app. Daarmee geeft hij of zij zich veilig aan en krijgt toegang tot dit dossier.</p>
+    <div style="width:170px; height:170px; margin:0 auto 16px; border:0.5px solid var(--color-border-secondary); border-radius:var(--border-radius-md); display:grid; grid-template-columns:repeat(7,1fr); grid-template-rows:repeat(7,1fr); gap:3px; padding:14px; box-sizing:border-box;">
+      <div style="background:#154273;"></div><div style="background:#154273;"></div><div style="background:#154273;"></div><div></div><div style="background:#154273;"></div><div></div><div style="background:#154273;"></div>
+      <div style="background:#154273;"></div><div></div><div style="background:#154273;"></div><div style="background:#154273;"></div><div></div><div style="background:#154273;"></div><div style="background:#154273;"></div>
+      <div style="background:#154273;"></div><div style="background:#154273;"></div><div></div><div></div><div style="background:#154273;"></div><div></div><div></div>
+      <div></div><div style="background:#154273;"></div><div></div><div style="background:#154273;"></div><div></div><div style="background:#154273;"></div><div style="background:#154273;"></div>
+      <div style="background:#154273;"></div><div></div><div style="background:#154273;"></div><div></div><div style="background:#154273;"></div><div></div><div style="background:#154273;"></div>
+      <div></div><div style="background:#154273;"></div><div style="background:#154273;"></div><div style="background:#154273;"></div><div></div><div style="background:#154273;"></div><div></div>
+      <div style="background:#154273;"></div><div></div><div style="background:#154273;"></div><div></div><div style="background:#154273;"></div><div style="background:#154273;"></div><div style="background:#154273;"></div>
+    </div>
+    <button onclick="document.getElementById('digidModal').style.display='none'" style="width:100%; background:#154273; color:#fff; border:none; padding:10px 16px; border-radius:var(--border-radius-md); font-size:14px; cursor:pointer;">Uitnodigingslink kopiëren</button>
+  </div>
+</div>
+
+<script>
+var zorgDone=false;
+var backBtn='<a onclick="ga(\'overview\')" style="cursor:pointer; display:inline-flex; align-items:center; gap:7px; font-size:14px; color:#154273; text-decoration:none; margin-bottom:18px;"><i class="ti ti-arrow-left" aria-hidden="true"></i> Nabestaande dossier</a>';
+function tabs(open){return '<div style="display:flex; gap:8px; margin-bottom:22px; border-bottom:0.5px solid var(--color-border-tertiary);"><span style="font-size:14px; font-weight:'+(open?'500':'400')+'; color:'+(open?'#154273':'var(--color-text-secondary)')+'; padding:0 2px 10px; '+(open?'border-bottom:3px solid #154273;':'')+'">Open</span><span style="font-size:14px; font-weight:'+(open?'400':'500')+'; color:'+(open?'var(--color-text-secondary)':'#154273')+'; padding:0 2px 10px 16px; '+(open?'':'border-bottom:3px solid #154273;')+'">Afgerond</span></div>';}
+
+var views={
+water:backBtn+'<div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;"><p style="font-size:13px; color:var(--color-text-secondary); margin:0;">Taak</p><span style="background:#fdf0ef; color:#9b1b12; font-size:12px; font-weight:500; padding:2px 9px; border-radius:11px; display:inline-flex; align-items:center; gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#d52b1e;"></span> Urgent</span></div><h1 style="font-size:24px; font-weight:500; color:#154273; margin:0 0 6px; line-height:1.25;">Aanmaning waterschapsbelasting betalen</h1><p style="font-size:14px; color:var(--color-text-secondary); margin:0 0 22px;">Afzender: Waterschap · Geadresseerde: erven van Cees de Vries</p>'+tabs(true)+'<div style="border:0.5px solid var(--color-border-secondary); border-radius:var(--border-radius-lg); padding:18px; margin-bottom:28px;"><p style="font-size:15px; font-weight:500; color:#154273; margin:0 0 4px;">Betaal de openstaande waterschapsbelasting van € 184,50</p><p style="font-size:13px; color:#9b1b12; margin:0 0 16px;"><i class="ti ti-clock" style="vertical-align:-2px;"></i> vóór 16 juni 2026 — over 12 dagen</p><button onclick="alert(\'Demo: doorverwijzing naar de betaalpagina van het waterschap (extern).\')" style="width:100%; background:#154273; color:#fff; border:none; padding:12px 16px; border-radius:var(--border-radius-md); font-size:15px; font-weight:500; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">Naar de betaalpagina <i class="ti ti-external-link"></i></button><p style="font-size:12px; color:var(--color-text-tertiary); margin:12px 0 0; text-align:center;">U verlaat MijnOverheid en gaat naar de website van het waterschap.</p></div><h2 style="font-size:18px; font-weight:500; color:#154273; margin:0 0 16px;">Stappen</h2><div style="position:relative; margin-bottom:32px;"><div style="display:flex; gap:14px; align-items:flex-start; position:relative; padding-bottom:24px;"><div style="position:absolute; left:15px; top:30px; bottom:0; width:2px; background:#39870c;"></div><div style="width:32px; height:32px; border-radius:50%; background:#39870c; color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; z-index:1;"><i class="ti ti-check"></i></div><div style="padding-top:5px;"><div style="font-size:15px; font-weight:500; color:#39870c;">Aanmaning ontvangen en gecontroleerd</div><div style="font-size:13px; color:var(--color-text-secondary);">Ontvangen op 22 mei 2026</div></div></div><div style="display:flex; gap:14px; align-items:flex-start;"><div style="width:32px; height:32px; border-radius:50%; background:#154273; color:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:14px; font-weight:500; z-index:1;">2</div><div style="padding-top:5px;"><div style="font-size:15px; font-weight:500; color:#154273;">Bedrag betalen via het waterschap</div><div style="font-size:13px; color:var(--color-text-secondary);">Te doen — gebruik de knop hierboven</div></div></div></div>',
+
+cak:backBtn+'<div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;"><p style="font-size:13px; color:var(--color-text-secondary); margin:0;">Taak</p><span style="background:#fef3e2; color:#854f0b; font-size:12px; font-weight:500; padding:2px 9px; border-radius:11px; display:inline-flex; align-items:center; gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#ef9f27;"></span> Belangrijk</span></div><h1 style="font-size:24px; font-weight:500; color:#154273; margin:0 0 6px;">Eindafrekening eigen bijdrage Wlz betalen</h1><p style="font-size:14px; color:var(--color-text-secondary); margin:0 0 22px;">Afzender: CAK · Inzake Cees de Vries</p>'+tabs(true)+'<div style="border:0.5px solid var(--color-border-secondary); border-radius:var(--border-radius-lg); padding:18px; margin-bottom:28px;"><p style="font-size:15px; font-weight:500; color:#154273; margin:0 0 4px;">Betaal de eindafrekening van de eigen bijdrage Wlz</p><p style="font-size:13px; color:var(--color-text-secondary); margin:0 0 16px;">vóór 10 juli 2026 — over 36 dagen · ~15 min</p><button onclick="alert(\'Demo: doorverwijzing naar de betaalpagina van het CAK (extern).\')" style="width:100%; background:#154273; color:#fff; border:none; padding:12px 16px; border-radius:var(--border-radius-md); font-size:15px; font-weight:500; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">Naar de betaalpagina <i class="ti ti-external-link"></i></button><p style="font-size:12px; color:var(--color-text-tertiary); margin:12px 0 0; text-align:center;">U verlaat MijnOverheid en gaat naar de website van het CAK.</p></div><h2 style="font-size:18px; font-weight:500; color:#154273; margin:0 0 12px;">Details</h2><div style="font-size:14px;"><div style="padding:10px 0; border-bottom:0.5px solid var(--color-border-tertiary);"><div style="font-weight:500; color:#154273; margin-bottom:2px;">Omschrijving</div><div style="color:var(--color-text-secondary);">Eindafrekening van de eigen bijdrage voor de Wet langdurige zorg (Wlz) over de periode tot het overlijden van Cees de Vries.</div></div><div style="padding:10px 0;"><div style="font-weight:500; color:#154273; margin-bottom:2px;">Waarom ziet u deze taak?</div><div style="color:var(--color-text-secondary);">Aangemaakt op basis van een factuur van het CAK in uw correspondentiestroom.</div></div></div>',
+
+contact:backBtn+'<div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;"><p style="font-size:13px; color:var(--color-text-secondary); margin:0;">Taak</p><span style="background:#f3f8ee; color:#27500a; font-size:12px; font-weight:500; padding:2px 9px; border-radius:11px; display:inline-flex; align-items:center; gap:4px;"><i class="ti ti-robot" style="font-size:13px;"></i> Voorbereid door ons</span></div><h1 style="font-size:24px; font-weight:500; color:#154273; margin:0 0 6px;">Contactpersoon doorgeven</h1><p style="font-size:14px; color:var(--color-text-secondary); margin:0 0 22px;">Afzender: Belastingdienst · Inzake Cees de Vries</p>'+tabs(true)+'<div style="background:#f3f8ee; border:0.5px solid #cfe3bd; border-radius:var(--border-radius-lg); padding:18px; margin-bottom:28px;"><div style="display:flex; gap:10px; align-items:flex-start; margin-bottom:14px;"><i class="ti ti-robot" style="color:#39870c; font-size:22px;"></i><div><p style="font-size:15px; font-weight:500; color:#27500a; margin:0 0 2px;">Wij hebben dit voor u ingevuld</p><p style="font-size:13px; color:#3b6d11; margin:0;">U bent als partner aangedragen als contactpersoon voor de Belastingdienst. Controleer en keur goed.</p></div></div><button onclick="alert(\'Demo: in het volledige prototype keurt u dit goed, net als bij de zorgtoeslag.\')" style="width:100%; background:#39870c; color:#fff; border:none; padding:12px 16px; border-radius:var(--border-radius-md); font-size:15px; font-weight:500; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;"><i class="ti ti-check"></i> Controleren en goedkeuren</button></div>',
+
+volledig:backBtn+'<h1 style="font-size:24px; font-weight:500; color:#154273; margin:0 0 4px;">Mijn taken</h1><p style="font-size:15px; color:var(--color-text-secondary); margin:0 0 20px;">Alles wat er na het overlijden van uw partner Cees nog uw aandacht vraagt, uit uw nabestaandedossier.</p><div style="display:flex; gap:10px; align-items:center; margin-bottom:18px; flex-wrap:wrap;"><div style="position:relative; flex:1; min-width:200px;"><i class="ti ti-search" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--color-text-tertiary); font-size:16px;"></i><input type="text" id="zoek" oninput="renderV()" placeholder="Zoek in taken of afzender" style="width:100%; padding-left:36px; box-sizing:border-box;" /></div><select id="fAfzender" onchange="renderV()" style="width:auto; min-width:150px;"><option value="">Alle afzenders</option><option>Belastingdienst</option><option>CAK</option><option>Dienst Toeslagen</option><option>Waterschap</option><option>Vitens</option></select></div><div style="display:flex; gap:0; margin-bottom:6px; border-bottom:0.5px solid var(--color-border-tertiary);"><button id="tabOpen" onclick="setTabV(\'open\')" style="background:none; border:none; cursor:pointer; font-size:15px; font-weight:500; color:#154273; padding:0 4px 12px; border-bottom:3px solid #154273; display:flex; align-items:center; gap:8px;">Open taken <span id="cOpen" style="background:#e6eef5; color:#154273; font-size:12px; min-width:20px; height:20px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; padding:0 6px;">0</span></button><button id="tabDone" onclick="setTabV(\'done\')" style="background:none; border:none; cursor:pointer; font-size:15px; font-weight:400; color:var(--color-text-secondary); padding:0 4px 12px 20px; display:flex; align-items:center; gap:8px;">Afgerond <span id="cDone" style="background:#f1efe8; color:#444441; font-size:12px; min-width:20px; height:20px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; padding:0 6px;">0</span></button></div><div id="taakLijstV" style="margin-bottom:36px;"></div><h2 style="font-size:18px; font-weight:500; color:#154273; margin:0 0 4px;">Wat ik kan regelen</h2><p style="font-size:14px; color:var(--color-text-secondary); margin:0 0 8px;">Dingen die u zelf in gang kunt zetten — geen verplichting.</p><div id="regelLijstV"></div>'
+};
+
+function zorgView(){
+  var card= zorgDone
+   ? '<div style="background:#f3f8ee; border:0.5px solid #cfe3bd; border-radius:var(--border-radius-lg); padding:22px; margin-bottom:28px; text-align:center;"><div style="width:48px; height:48px; border-radius:50%; background:#39870c; color:#fff; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-size:24px;"><i class="ti ti-check"></i></div><p style="font-size:16px; font-weight:500; color:#27500a; margin:0 0 4px;">Goedgekeurd en doorgegeven</p><p style="font-size:13px; color:#3b6d11; margin:0;">Wij hebben Toeslagen geïnformeerd. U hoeft verder niets te doen. Deze taak staat nu onder Afgerond.</p></div>'
+   : '<div style="background:#f3f8ee; border:0.5px solid #cfe3bd; border-radius:var(--border-radius-lg); padding:18px; margin-bottom:28px;"><div style="display:flex; gap:10px; align-items:flex-start; margin-bottom:14px;"><i class="ti ti-robot" style="color:#39870c; font-size:22px;"></i><div><p style="font-size:15px; font-weight:500; color:#27500a; margin:0 0 2px;">Wij hebben dit voor u ingevuld</p><p style="font-size:13px; color:#3b6d11; margin:0;">Controleer de gegevens hieronder. Klopt het? Dan hoeft u alleen goed te keuren — wij regelen de rest.</p></div></div><div style="background:#fff; border:0.5px solid #cfe3bd; border-radius:var(--border-radius-md); padding:4px 14px; margin-bottom:16px;"><div style="padding:10px 0; border-bottom:0.5px solid var(--color-border-tertiary); display:flex; justify-content:space-between; gap:12px;"><span style="font-size:13px; color:var(--color-text-secondary);">Wat</span><span style="font-size:13px; color:#154273; font-weight:500; text-align:right;">Zorgtoeslag van Cees stopzetten</span></div><div style="padding:10px 0; border-bottom:0.5px solid var(--color-border-tertiary); display:flex; justify-content:space-between; gap:12px;"><span style="font-size:13px; color:var(--color-text-secondary);">Ingangsdatum</span><span style="font-size:13px; color:#154273; font-weight:500; text-align:right;">1 juni 2026</span></div><div style="padding:10px 0; display:flex; justify-content:space-between; gap:12px;"><span style="font-size:13px; color:var(--color-text-secondary);">Op basis van</span><span style="font-size:13px; color:#154273; font-weight:500; text-align:right;">BRP-melding · bekend toeslagnummer</span></div></div><button onclick="goedkeuren()" style="width:100%; background:#39870c; color:#fff; border:none; padding:12px 16px; border-radius:var(--border-radius-md); font-size:15px; font-weight:500; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;"><i class="ti ti-check"></i> Controleren en goedkeuren</button><button onclick="alert(\'Demo: hier kunt u de gegevens corrigeren of een vraag stellen.\')" style="width:100%; background:none; color:#154273; border:none; padding:10px 16px 0; font-size:14px; cursor:pointer;">Klopt iets niet? Corrigeren of vraag stellen</button></div>';
+  return backBtn+'<div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;"><p style="font-size:13px; color:var(--color-text-secondary); margin:0;">Taak</p><span style="background:#f3f8ee; color:#27500a; font-size:12px; font-weight:500; padding:2px 9px; border-radius:11px; display:inline-flex; align-items:center; gap:4px;"><i class="ti ti-robot" style="font-size:13px;"></i> Voorbereid door ons</span></div><h1 style="font-size:24px; font-weight:500; color:#154273; margin:0 0 6px;">Zorgtoeslag stopzetten</h1><p style="font-size:14px; color:var(--color-text-secondary); margin:0 0 22px;">Afzender: Toeslagen · Voor Cees de Vries</p>'+tabs(!zorgDone)+card;
+}
+
+var footers={water:'Bel het waterschap op <span style="text-decoration:underline;">0800 - 1234</span> (maandag t/m vrijdag, 9.00–17.00 uur).',cak:'Bel het CAK op <span style="text-decoration:underline;">0800 - 0087</span> (maandag t/m vrijdag, 8.30–17.00 uur).',zorg:'Bel de BelastingTelefoon op <span style="text-decoration:underline;">0800 - 0543</span> (maandag t/m vrijdag, 8.00–17.00 uur).',contact:'Bel de BelastingTelefoon op <span style="text-decoration:underline;">0800 - 0543</span> (maandag t/m vrijdag, 8.00–17.00 uur).'};
+
+function ga(v){
+  ['overview','water','cak','zorg','contact','volledig'].forEach(function(id){document.getElementById('view-'+id).style.display='none';});
+  if(v==='zorg'){document.getElementById('view-zorg').innerHTML=zorgView();}
+  else if(views[v]!==undefined && v!=='overview'){document.getElementById('view-'+v).innerHTML=views[v];}
+  document.getElementById('view-'+v).style.display='block';
+  var f=document.getElementById('footer');
+  if(footers[v]){document.getElementById('footerLine').innerHTML=footers[v];f.style.display='block';}else{f.style.display='none';}
+  if(v==='volledig'){renderV();}
+  try{window.scrollTo(0,0);}catch(e){}
+}
+
+function goedkeuren(){
+  zorgDone=true;
+  document.getElementById('view-zorg').innerHTML=zorgView();
+  document.getElementById('navBadge').textContent='1';
+  document.getElementById('prepCount').textContent='1';
+  var r=document.getElementById('rowZorg'); if(r){r.style.opacity='0.6';}
+}
+
+var takenV=[
+{titel:"Contactpersoon doorgeven aan de Belastingdienst", afz:"Belastingdienst", deadline:"vóór 2 juli 2026", status:"open", v:"contact"},
+{titel:"Eindafrekening eigen bijdrage Wlz betalen", afz:"CAK", deadline:"vóór 11 juli 2026", status:"open", v:"cak"},
+{titel:"Terugvordering zorgtoeslag — betalen of bezwaar", afz:"Dienst Toeslagen", deadline:"vóór 18 juli 2026", status:"open", v:""},
+{titel:"Aanslag waterschapsbelasting betalen", afz:"Waterschap", deadline:"vóór 7 augustus 2026", status:"open", v:"water"},
+{titel:"Watercontract opzeggen", afz:"Vitens", deadline:"geen vaste datum", status:"open", v:""},
+{titel:"Aangifte erfbelasting indienen", afz:"Belastingdienst", deadline:"vóór 28 april 2027", status:"open", v:""}
+];
+var nvtV=[
+{titel:"Kinderbijslag stopzetten", afz:"SVB", reden:"Geen minderjarige kinderen bekend."},
+{titel:"Studiefinanciering aanpassen", afz:"DUO", reden:"Geen studerende kinderen bekend."},
+{titel:"Parkeervergunning opzeggen", afz:"Gemeente", reden:"Geen parkeervergunning op naam van de overledene."}
+];
+var regelV=[
+{titel:"Familie of vriend uitnodigen om te helpen", sub:"Geef iemand toegang met DigiD", icon:"ti-users-plus", act:"document.getElementById(\'digidModal\').style.display=\'flex\'"},
+{titel:"Voorkeur voor contact doorgeven", sub:"Digitaal in dit dossier of per brief", icon:"ti-mail", act:"alert(\'Demo: kies digitaal of per brief.\')"},
+{titel:"Notificaties instellen", sub:"Nieuwe taken en naderende deadlines", icon:"ti-bell", act:"alert(\'Demo: notificatie-instellingen.\')"},
+{titel:"Een vraag stellen aan de digitale assistent", sub:"Via MijnGesprekken", icon:"ti-message", act:"alert(\'Demo: opent de digitale assistent.\')"}
+];
+var tabV='open';
+function escV(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function setTabV(t){
+  tabV=t;
+  var to=document.getElementById('tabOpen'), td=document.getElementById('tabDone');
+  if(t==='open'){to.style.fontWeight='500';to.style.color='#154273';to.style.borderBottom='3px solid #154273';td.style.fontWeight='400';td.style.color='var(--color-text-secondary)';td.style.borderBottom='none';}
+  else{td.style.fontWeight='500';td.style.color='#154273';td.style.borderBottom='3px solid #154273';to.style.fontWeight='400';to.style.color='var(--color-text-secondary)';to.style.borderBottom='none';}
+  renderV();
+}
+function renderV(){
+  var zoekEl=document.getElementById('zoek'); if(!zoekEl)return;
+  var q=(zoekEl.value||'').toLowerCase();
+  var fa=document.getElementById('fAfzender').value;
+  var done=zorgDone?[{titel:"Zorgtoeslag stopzetten", afz:"Dienst Toeslagen", deadline:"afgerond", status:"done", v:"zorg"}]:[];
+  var open=takenV.filter(function(t){return t.status==='open';});
+  document.getElementById('cOpen').textContent=open.length;
+  document.getElementById('cDone').textContent=done.length;
+  function match(t){return (!q||t.titel.toLowerCase().indexOf(q)>=0||t.afz.toLowerCase().indexOf(q)>=0)&&(!fa||t.afz===fa);}
+  var html='';
+  var list=(tabV==='open'?open:done).filter(match);
+  list.forEach(function(t){
+    var clk=t.v?'onclick="ga(\''+t.v+'\')"':'';
+    html+='<button '+clk+' style="width:100%; text-align:left; background:none; border:none; border-bottom:0.5px solid var(--color-border-tertiary); padding:16px 2px; cursor:'+(t.v?'pointer':'default')+'; display:flex; gap:16px; align-items:center;"><span style="flex:1;"><span style="color:#185fa5; font-weight:500; font-size:15px;">'+escV(t.titel)+'</span><br><span style="color:var(--color-text-secondary); font-size:13px;">'+escV(t.afz)+'</span></span><span style="color:var(--color-text-secondary); font-size:14px; white-space:nowrap;">'+escV(t.deadline)+'</span>'+(t.v?'<i class="ti ti-arrow-right" style="color:#185fa5;"></i>':'')+'</button>';
+  });
+  if(list.length===0){html+='<p style="font-size:14px; color:var(--color-text-tertiary); padding:16px 2px;">Geen taken gevonden.</p>';}
+  if(tabV==='open'){
+    var nv=nvtV.filter(function(t){return (!q||t.titel.toLowerCase().indexOf(q)>=0||t.afz.toLowerCase().indexOf(q)>=0)&&(!fa||t.afz===fa);});
+    if(nv.length>0){
+      html+='<div style="margin-top:18px; margin-bottom:2px; font-size:13px; font-weight:500; color:var(--color-text-secondary); display:flex; align-items:center; gap:7px;"><i class="ti ti-eye-off"></i> Niet van toepassing op uw situatie</div>';
+      nv.forEach(function(t){html+='<div style="border-bottom:0.5px solid var(--color-border-tertiary); padding:16px 2px; display:flex; gap:16px; align-items:center; opacity:0.7;"><span style="flex:1;"><span style="color:#5f5e5a; font-weight:500; font-size:15px; text-decoration:line-through;">'+escV(t.titel)+'</span><br><span style="color:var(--color-text-tertiary); font-size:13px;">'+escV(t.afz)+' · '+escV(t.reden)+'</span></span><span style="background:#f1efe8; color:#444441; font-size:12px; font-weight:500; padding:2px 9px; border-radius:11px; white-space:nowrap;">Niet van toepassing</span></div>';});
+    }
+  }
+  document.getElementById('taakLijstV').innerHTML=html;
+  var rh='';
+  regelV.forEach(function(r){rh+='<button onclick="'+r.act+'" style="width:100%; text-align:left; background:none; border:none; border-bottom:0.5px solid var(--color-border-tertiary); padding:16px 2px; cursor:pointer; display:flex; gap:14px; align-items:center;"><i class="ti '+r.icon+'" style="color:#154273; font-size:20px;"></i><span style="flex:1;"><span style="color:#185fa5; font-weight:500; font-size:15px;">'+escV(r.titel)+'</span><br><span style="color:var(--color-text-secondary); font-size:13px;">'+escV(r.sub)+'</span></span><i class="ti ti-arrow-right" style="color:#185fa5;"></i></button>';});
+  document.getElementById('regelLijstV').innerHTML=rh;
+}
+</script>
+</div>
