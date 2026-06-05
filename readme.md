@@ -23,7 +23,9 @@ _(draait via een tunnel naar mijn laptop — kan tijdelijk offline zijn)_
 
 - **Nabestaandendossier** — een nieuwe pagina met een overzicht van **taken en brieven**, gesplitst in
   _Nog te doen_ en _Geen actie nodig_, gesorteerd op urgentie, met een voortgangsindicator en de
-  geruststelling "X zaken zijn al automatisch geregeld".
+  geruststelling "X zaken zijn al automatisch geregeld". Bovenaan een **uitgelichte taak** (de actie
+  met de kortste deadline), een accordion met **belangrijke documenten** (condoleanceberichten,
+  akte/erfrecht, mogelijke rechten, FAQ) en een **"wat komt er nog aan"-tijdlijn** per maand.
 - **Briefdetail** — elke brief is klikbaar: afzender, aanhef, aan wie gericht, op welk adres, wat er
   gevraagd wordt + een knop naar de afhandeling. Het signaleert de adresserings-pijnpunten uit de
   challenge (gericht aan _"de erven"_, bezorgd op het verzorgingstehuis-adres).
@@ -32,8 +34,12 @@ _(draait via een tunnel naar mijn laptop — kan tijdelijk offline zijn)_
 - **Een simpele back-end** gebaseerd op het **MijnTaken-contract** (`POST /context/zoek`,
   `GET /taken/{uuid}`) — zodat anderen tijdens de hackathon **echt taken voor een burger kunnen
   aanmaken en bewerken** via de API.
-- **Integratie** met de bestaande **Overzicht-pagina** (prominente banner + de open taken) en de
+- **Integratie** met de bestaande **Home-pagina** (prominente banner + de open taken) en de
   **sidebar** (tweede menu-item, met badge).
+- **MijnOverheid-vormgeving** — de demo is opgemaakt in de **Rijkshuisstijl** (lint, hemelblauw/
+  donkerblauw palet, RO Sans, witte content-panelen), aansluitend op MijnOverheid en het NL Design
+  System. (De Rijkshuisstijl-fonts en het lint-logo zijn voorbehouden aan officiële Rijksoverheids-
+  communicatie; dit is een prototype.)
 
 | Briefdetail (met pijnpunt-signalering)       | Mijn berichten                               |
 | -------------------------------------------- | -------------------------------------------- |
