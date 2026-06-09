@@ -71,6 +71,23 @@ const TITLES = {
   "WS.AANSLAG": "Aanslag waterschapsbelasting betalen",
 };
 
+// Taken die we voor de demo doen alsof een AI ze al heeft 'ingevuld' (een label
+// op de taak, net als 'nabestaandendossier'). Formulier-/aanvraagachtige acties.
+// Taken waarvan een AI in de demo het formulier al heeft ingevuld (klaar om te
+// controleren en in te dienen). Bewust niet de meest urgente, zodat ze
+// verschillen van de "Belangrijkste" (= urgente acties die de burger zelf moet
+// oppakken, niet AI-ingevuld).
+const INGEVULD = new Set([
+  "TOESLAGEN.TERUGVORDERING-ZORG", // AI heeft het bezwaarschrift opgesteld
+  "BD.AANGIFTE-ERFBELASTING", // AI heeft de aangifte erfbelasting voorbereid
+]);
+
+// Taken die de nabestaande in de demo al heeft afgerond (bv. betaald), zodat
+// de "Afgerond"-weergave gevuld is en de voortgang zichtbaar vooruit gaat.
+const AFGEROND = new Set([
+  "CAK.WLZ-FACTUUR", // Eindafrekening eigen bijdrage Wlz betaald
+]);
+
 const TYPE_LABEL = {
   informatiebrief: "Informatiebrief",
   condoleance: "Condoleancebrief",
@@ -119,10 +136,11 @@ const taken = src.correspondentie.map((c) => {
     adres: c.adres ?? null,
     actieNodig: c.actie_vereist === true,
     automatisch: c.actie_vereist === false && c.type === "beschikking",
-    status: "open",
+    status: AFGEROND.has(c.brief_code) ? "afgerond" : "open",
     deadline,
     leidtTotZaak: c.actie_vereist ? cap(c.actie_omschrijving) : null,
     uitvoering: { canonicalUrl: URL_BY_ORG[org] ?? "" },
+    labels: ["nabestaandendossier", ...(INGEVULD.has(c.brief_code) ? ["ingevuld"] : [])],
   };
 });
 

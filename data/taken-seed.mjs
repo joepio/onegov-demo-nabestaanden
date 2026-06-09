@@ -34,7 +34,10 @@ export const takenSeed = [
     "leidtTotZaak": null,
     "uitvoering": {
       "canonicalUrl": "https://www.rdw.nl/particulier/voertuigen/auto/overlijden"
-    }
+    },
+    "labels": [
+      "nabestaandendossier"
+    ]
   },
   {
     "uuid": "urn:brief:test:00000000-0000-4000-8000-000000000031",
@@ -65,7 +68,10 @@ export const takenSeed = [
     "leidtTotZaak": null,
     "uitvoering": {
       "canonicalUrl": "https://www.svb.nl/nl/overlijden"
-    }
+    },
+    "labels": [
+      "nabestaandendossier"
+    ]
   },
   {
     "uuid": "urn:brief:test:00000000-0000-4000-8000-000000000032",
@@ -96,7 +102,10 @@ export const takenSeed = [
     "leidtTotZaak": null,
     "uitvoering": {
       "canonicalUrl": "https://www.hetcak.nl/"
-    }
+    },
+    "labels": [
+      "nabestaandendossier"
+    ]
   },
   {
     "uuid": "urn:brief:test:00000000-0000-4000-8000-000000000033",
@@ -122,12 +131,15 @@ export const takenSeed = [
     },
     "actieNodig": true,
     "automatisch": false,
-    "status": "open",
+    "status": "afgerond",
     "deadline": "2026-07-10T23:59:59+01:00",
     "leidtTotZaak": "Factuur betalen",
     "uitvoering": {
       "canonicalUrl": "https://www.hetcak.nl/"
-    }
+    },
+    "labels": [
+      "nabestaandendossier"
+    ]
   },
   {
     "uuid": "urn:brief:test:00000000-0000-4000-8000-000000000034",
@@ -158,7 +170,10 @@ export const takenSeed = [
     "leidtTotZaak": null,
     "uitvoering": {
       "canonicalUrl": "https://www.toeslagen.nl/"
-    }
+    },
+    "labels": [
+      "nabestaandendossier"
+    ]
   },
   {
     "uuid": "urn:brief:test:00000000-0000-4000-8000-000000000035",
@@ -189,7 +204,11 @@ export const takenSeed = [
     "leidtTotZaak": "Bedrag terugbetalen of bezwaar maken",
     "uitvoering": {
       "canonicalUrl": "https://www.toeslagen.nl/"
-    }
+    },
+    "labels": [
+      "nabestaandendossier",
+      "ingevuld"
+    ]
   },
   {
     "uuid": "urn:brief:test:00000000-0000-4000-8000-000000000036",
@@ -220,7 +239,10 @@ export const takenSeed = [
     "leidtTotZaak": "Contactpersoon doorgeven aan Belastingdienst",
     "uitvoering": {
       "canonicalUrl": "https://www.belastingdienst.nl/overlijden"
-    }
+    },
+    "labels": [
+      "nabestaandendossier"
+    ]
   },
   {
     "uuid": "urn:brief:test:00000000-0000-4000-8000-000000000037",
@@ -251,7 +273,11 @@ export const takenSeed = [
     "leidtTotZaak": "Aangifte erfbelasting binnen 8 maanden indienen",
     "uitvoering": {
       "canonicalUrl": "https://www.belastingdienst.nl/overlijden"
-    }
+    },
+    "labels": [
+      "nabestaandendossier",
+      "ingevuld"
+    ]
   },
   {
     "uuid": "urn:brief:test:00000000-0000-4000-8000-000000000038",
@@ -282,7 +308,10 @@ export const takenSeed = [
     "leidtTotZaak": null,
     "uitvoering": {
       "canonicalUrl": "https://www.rijksoverheid.nl/onderwerpen/overlijden"
-    }
+    },
+    "labels": [
+      "nabestaandendossier"
+    ]
   },
   {
     "uuid": "urn:brief:test:00000000-0000-4000-8000-000000000039",
@@ -313,6 +342,9 @@ export const takenSeed = [
     "leidtTotZaak": "Aanslag betalen — als erfgenaam aansprakelijk",
     "uitvoering": {
       "canonicalUrl": "https://www.belastingsamenwerking.nl/"
-    }
+    },
+    "labels": [
+      "nabestaandendossier"
+    ]
   }
 ];

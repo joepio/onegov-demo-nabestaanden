@@ -47,7 +47,10 @@ const MIME = {
 // data/taken-seed.mjs. De live state wordt weggeschreven naar een JSON-bestand
 // zodat hij een serverherstart overleeft. Dat bestand is gitignored (volatiele
 // demodata hoort niet in git). Wil je resetten? Verwijder backend/taken-state.json.
-const STATE_FILE = fileURLToPath(new URL("./taken-state.json", import.meta.url));
+// Pad kan via STATE_FILE worden overschreven (bv. een gemount volume in productie).
+const STATE_FILE = process.env.STATE_FILE
+  ? process.env.STATE_FILE
+  : fileURLToPath(new URL("./taken-state.json", import.meta.url));
 
 // uuid -> taak. Laad uit het state-bestand, anders uit de seed.
 let taken;
@@ -232,6 +235,7 @@ const server = createServer(async (req, res) => {
         deadline: body.deadline ?? "",
         leidtTotZaak: body.leidtTotZaak ?? null,
         uitvoering: { canonicalUrl: body.uitvoering?.canonicalUrl ?? "", ...(body.uitvoering ?? {}) },
+        labels: Array.isArray(body.labels) ? body.labels : ["nabestaandendossier"],
       };
       if (body.toelichting?.nl) taak.toelichting = body.toelichting;
       taken.set(taak.uuid, taak);
@@ -267,6 +271,7 @@ const server = createServer(async (req, res) => {
         if ("deadline" in body) taak.deadline = body.deadline;
         if ("leidtTotZaak" in body) taak.leidtTotZaak = body.leidtTotZaak;
         if (body.uitvoering) taak.uitvoering = { ...taak.uitvoering, ...body.uitvoering };
+        if (Array.isArray(body.labels)) taak.labels = body.labels;
         persist();
         broadcast({ type: "taken" });
         return send(res, 200, taak);

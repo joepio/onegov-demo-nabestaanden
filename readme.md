@@ -14,18 +14,23 @@ afstemming, vaak gericht aan _"de erven"_ en bezorgd op het verkeerde adres. Dez
 de overheid die losse poststroom kan bundelen tot **één overzicht** waarin de nabestaande ziet wat er
 **al automatisch is geregeld** en wat er nog **aandacht vraagt**.
 
-**🔗 Live demo:** **https://t-1sk9qbdw.tunn.dev/#plannen**
-_(draait via een tunnel naar mijn laptop — kan tijdelijk offline zijn)_
+**🔗 Live demo:** **https://onegov-nabestaanden.fly.dev/#plannen**
+_(draait op Fly.io — app én schrijfbare MijnTaken-API op één URL)_
 
-![Het Nabestaandendossier: nog te doen en geen actie nodig](screenshots/dossier.png)
+![Het Nabestaandendossier: uitgelichte taak, drie taken-overzichten, tijdlijn en documenten](screenshots/dossier.png)
 
 ## In deze demo
 
-- **Nabestaandendossier** — een nieuwe pagina met een overzicht van **taken en brieven**, gesplitst in
-  _Nog te doen_ en _Geen actie nodig_, gesorteerd op urgentie, met een voortgangsindicator en de
-  geruststelling "X zaken zijn al automatisch geregeld". Bovenaan een **uitgelichte taak** (de actie
-  met de kortste deadline), een accordion met **belangrijke documenten** (condoleanceberichten,
-  akte/erfrecht, mogelijke rechten, FAQ) en een **"wat komt er nog aan"-tijdlijn** per maand.
+- **Nabestaandendossier** — één pagina die de poststroom bundelt: bovenaan een **uitgelichte taak**
+  (kortste deadline) en de voortgang, daaronder **drie overzichten** die elk een filter op álle taken
+  zijn (max 3 getoond, met "Bekijk alle taken"): **Belangrijkste** (urgente acties die u zelf moet
+  doen), **Ingevuld door AI** (taken die de assistent al heeft voorbereid) en **Geen actie nodig**
+  (ter info of afgerond). Verder een **"wat komt er nog aan"-tijdlijn** per maand en onderaan een
+  accordion met **belangrijke documenten** (condoleanceberichten, akte/erfrecht, mogelijke rechten, FAQ).
+- **Mijn taken** — alle taken met **tabs** (_Open taken_ / _Afgerond_), **categoriefilters**
+  (Belangrijkste / Ingevuld door AI / Geen actie nodig) en een **zoekbalk**. Taken dragen **labels**
+  (bv. `nabestaandendossier`, `ingevuld`) waarop gefilterd kan worden — zo is zichtbaar wat een AI al
+  heeft ingevuld.
 - **Briefdetail** — elke brief is klikbaar: afzender, aanhef, aan wie gericht, op welk adres, wat er
   gevraagd wordt + een knop naar de afhandeling. Het signaleert de adresserings-pijnpunten uit de
   challenge (gericht aan _"de erven"_, bezorgd op het verzorgingstehuis-adres).
@@ -40,6 +45,10 @@ _(draait via een tunnel naar mijn laptop — kan tijdelijk offline zijn)_
   donkerblauw palet, RO Sans, witte content-panelen), aansluitend op MijnOverheid en het NL Design
   System. (De Rijkshuisstijl-fonts en het lint-logo zijn voorbehouden aan officiële Rijksoverheids-
   communicatie; dit is een prototype.)
+
+**Mijn taken** — tabs, filters, labels en zoeken:
+
+![Mijn taken met tabs, filters en zoekbalk](screenshots/taken.png)
 
 | Briefdetail (met pijnpunt-signalering)       | Mijn berichten                               |
 | -------------------------------------------- | -------------------------------------------- |
@@ -71,7 +80,14 @@ node backend/server.mjs
 
 De server serveert de app same-origin én de API, dus alles werkt op één URL — geen CORS, geen config.
 
-**Online zetten** met één tunnel (geen account nodig):
+**Online** draait de demo op **Fly.io** (app + API op één URL, met persistente state op een
+volume): **https://onegov-nabestaanden.fly.dev/#plannen**. Opnieuw uitrollen:
+
+```sh
+fly deploy   # config staat in fly.toml + Dockerfile
+```
+
+Snel even delen zónder account kan ook met een tunnel:
 
 ```sh
 npx cloudflared tunnel --url http://localhost:8787
@@ -85,7 +101,7 @@ is verplicht.
 
 ```sh
 # Nieuwe brief/taak aanmaken
-curl -X POST https://<tunnel>/taken \
+curl -X POST https://onegov-nabestaanden.fly.dev/taken \
   -H 'content-type: application/json' \
   -d '{
     "organisatie": "svb",
@@ -100,7 +116,7 @@ curl -X POST https://<tunnel>/taken \
   }'
 
 # Taak afronden
-curl -X PATCH https://<tunnel>/taken/<uuid> -H 'content-type: application/json' -d '{"status":"afgerond"}'
+curl -X PATCH https://onegov-nabestaanden.fly.dev/taken/<uuid> -H 'content-type: application/json' -d '{"status":"afgerond"}'
 ```
 
 De brief verschijnt **direct** in elke open app (via de live-update). Belangrijkste velden:
@@ -126,7 +142,9 @@ Volledige documentatie en alle endpoints: **[`backend/README.md`](backend/README
 ```
 index.html        markup, navigatie, icon-sprite
 styles.css        opmaak (design-tokens in :root)
+nlds-theme.css    NLDS/Utrecht-componentcorrecties (pilot op de briefdetailpagina)
 app.js            routing, rendering en interactie (vanilla JS, geen build)
+vendor/nlds/      gevendorde NLDS: Utrecht-componenten + Rijkshuisstijl Community tokens
 backend/
   server.mjs      app + MijnTaken-API + live updates + JSON-persistentie
   README.md       API-documentatie
@@ -135,6 +153,8 @@ data/
   build-seed.mjs  converter van de officiële challenge-dataset
   onegov2-truus-cees.json   vendored golden fixture
 screenshots/
+Dockerfile        zero-dependency Node-image (Fly.io)
+fly.toml          Fly.io-deploy (volume voor persistente state)
 ```
 
 ## Hoe dit de challenge raakt

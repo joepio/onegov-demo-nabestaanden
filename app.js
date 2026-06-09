@@ -399,7 +399,7 @@ function render() {
   } else if (route === "overzicht") {
     renderOverview();
   } else if (route === "taken") {
-    renderTasks();
+    renderTasks(detail);
   } else if (route === "berichten" && detail) {
     renderMessageDetail(Number(detail));
   } else if (route === "berichten") {
@@ -805,21 +805,81 @@ function renderInformationForm() {
   `;
 }
 
-function renderTasks() {
+function renderTasks(view = "alle") {
   ensurePlanLoaded();
-  const open = planOpenActions();
-  const loading = planApiEnabled() && planFetchState === "loading" && !open.length;
+  const source = planSource();
+  const loading = planApiEnabled() && planFetchState === "loading" && !source.length;
+
+  // Status als tabs: Open taken vs Afgerond.
+  const openTasks = source.filter((t) => t.status !== "afgerond");
+  const afgerondTasks = source.filter(taakAfgerond);
+  const isAfgerondTab = view === "afgerond";
+
+  // Categorie-pills (alleen binnen "Open taken"). De preview-boxen op het
+  // dossier linken hierheen via #taken/<pill>.
+  const pills = [
+    { key: "alle", label: "Alle", match: () => true },
+    { key: "belangrijkste", label: "Belangrijkste", match: taakBelangrijkste },
+    { key: "ingevuld", label: "Ingevuld door AI", match: taakIngevuld },
+    { key: "geen-actie", label: "Geen actie nodig", match: taakGeenActie },
+  ];
+  const activePill = isAfgerondTab ? null : pills.find((p) => p.key === view) ?? pills[0];
+  const base = isAfgerondTab ? afgerondTasks : openTasks.filter(activePill.match);
+
+  // Lijst voor een zoekterm (titel + organisatie), gesorteerd op urgentie.
+  const listHtml = (query) => {
+    const needle = query.trim().toLowerCase();
+    const tasks = base
+      .filter((t) => !needle || `${t.titel?.nl ?? ""} ${orgNaam(t.organisatie ?? "overig")}`.toLowerCase().includes(needle))
+      .sort(planByUrgency);
+    return tasks.length
+      ? `<div class="content-panel"><div class="plan-task-list">${tasks.map((t) => planTaskRow(t, true)).join("")}</div></div>`
+      : `<p class="empty-line">Geen taken gevonden.</p>`;
+  };
+
+  const tabs = `
+    <div class="task-tabs">
+      <a class="task-tab${isAfgerondTab ? "" : " is-active"}" href="#taken">Open taken <span class="task-tab-count">${openTasks.length}</span></a>
+      <a class="task-tab${isAfgerondTab ? " is-active" : ""}" href="#taken/afgerond">Afgerond <span class="task-tab-count">${afgerondTasks.length}</span></a>
+    </div>`;
+
+  const pillBar = isAfgerondTab
+    ? ""
+    : `<div class="task-filter-bar" aria-label="Filter open taken">
+        ${pills
+          .map((p) => {
+            const count = openTasks.filter(p.match).length;
+            const href = p.key === "alle" ? "#taken" : `#taken/${p.key}`;
+            return `<a class="task-filter${p.key === activePill.key ? " is-active" : ""}" href="${href}">${escapeHtml(p.label)} <span class="task-filter-count">${count}</span></a>`;
+          })
+          .join("")}
+      </div>`;
+
   app.innerHTML = `
     <h1>Mijn taken</h1>
-    <p class="page-subtitle">Alles wat er na het overlijden van uw partner Cees nog uw aandacht vraagt, uit uw nabestaandedossier.</p>
-    ${
-      loading
-        ? `<p class="empty-line">Taken laden…</p>`
-        : open.length
-          ? `<div class="content-panel"><div class="plan-task-list">${open.map((t) => planTaskRow(t, true)).join("")}</div></div>`
-          : `<p class="empty-line">U heeft op dit moment geen openstaande taken.</p>`
-    }
+    <p class="page-subtitle">Alle taken en brieven uit uw nabestaandendossier.</p>
+    ${tabs}
+    <form class="search-row" data-taken-search role="search">
+      <label class="sr-only" for="taken-zoek">Zoeken in taken</label>
+      <input id="taken-zoek" name="q" autocomplete="off" placeholder="Zoek in taken…" />
+      <button class="secondary-button" type="submit"><svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>Zoeken</button>
+    </form>
+    ${pillBar}
+    <div id="taken-list">${loading ? `<p class="empty-line">Taken laden…</p>` : listHtml("")}</div>
   `;
+
+  // Zoeken-als-je-typt: alleen de lijst verversen, zodat het invoerveld focus houdt.
+  const form = app.querySelector("[data-taken-search]");
+  const input = form?.querySelector("input");
+  const update = () => {
+    const list = document.getElementById("taken-list");
+    if (list) list.innerHTML = listHtml(input.value);
+  };
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    update();
+  });
+  input?.addEventListener("input", update);
 }
 
 function renderMessages() {
@@ -1554,6 +1614,55 @@ function planOpenActions() {
     .sort(planByUrgency);
 }
 
+// --- Labels/tags op taken --------------------------------------------------
+// Elke nabestaanden-taak draagt minstens het label "nabestaandendossier".
+// "ingevuld" markeert taken die (in de demo) al door een AI zijn ingevuld.
+const taakLabelNamen = {
+  nabestaandendossier: "Nabestaandendossier",
+  ingevuld: "Ingevuld door AI",
+};
+
+function taakLabels(task) {
+  return Array.isArray(task.labels) && task.labels.length ? task.labels : ["nabestaandendossier"];
+}
+
+function taakHeeftLabel(task, label) {
+  return taakLabels(task).includes(label);
+}
+
+// De weergaven, gedeeld door het dossier-overzicht en "Mijn taken":
+//  - belangrijkste: openstaande acties die de burger zélf moet oppakken
+//                   (níet AI-ingevuld), kortste deadline eerst
+//  - ingevuld:      taken met het label "ingevuld" (AI heeft ze voorbereid)
+//  - geen actie:    afgerond of niet-actie (ter info / automatisch geregeld)
+function taakBelangrijkste(task) {
+  return planActionable(task) && task.status !== "afgerond" && !taakHeeftLabel(task, "ingevuld");
+}
+function taakIngevuld(task) {
+  return taakHeeftLabel(task, "ingevuld");
+}
+function taakGeenActie(task) {
+  return !(planActionable(task) && task.status !== "afgerond");
+}
+function taakAfgerond(task) {
+  return task.status === "afgerond";
+}
+
+// Compacte rij voor de preview-boxen: titel (+ label) en organisatie links,
+// de status/deadline-badge en pijl rechts.
+function planPreviewRow(task) {
+  const tag = taakHeeftLabel(task, "ingevuld") ? `<span class="taak-label">${taakLabelNamen.ingevuld}</span>` : "";
+  return `
+    <a class="plan-preview-row" href="#plannen/${encodeURIComponent(task.uuid)}">
+      <span class="plan-preview-row-main">
+        <span class="plan-preview-row-title">${escapeHtml(task.titel?.nl ?? "")}${tag}</span>
+        <small class="plan-preview-row-org">${escapeHtml(orgNaam(task.organisatie ?? "overig"))}</small>
+      </span>
+      ${planRowBadge(task)}
+      <span class="arrow" aria-hidden="true">→</span>
+    </a>`;
+}
+
 // Badge rechts van de titel:
 //  - actie met deadline → "Nog X dagen" (urgent) of "vóór <datum>"
 //  - afgerond / automatisch geregeld → groene "✓"-badge
@@ -1582,8 +1691,9 @@ function planTaskRow(task, showOrg = false) {
   const title = task.titel?.nl ?? "";
   const cls = `task-list-row${isDone ? " is-done" : ""}`;
   const orgMeta = showOrg ? `<small class="plan-row-org">${escapeHtml(orgNaam(task.organisatie ?? "overig"))}</small>` : "";
+  const tag = taakHeeftLabel(task, "ingevuld") ? `<span class="taak-label">${taakLabelNamen.ingevuld}</span>` : "";
   const inner = `
-    <strong><span class="task-title">${escapeHtml(title)}</span>${orgMeta}</strong>
+    <strong><span class="task-title">${escapeHtml(title)}</span>${tag}${orgMeta}</strong>
     ${planRowBadge(task)}
     <span class="arrow" aria-hidden="true">→</span>
   `;
@@ -1653,26 +1763,47 @@ function renderPlanDetail(rawId) {
       ? "Dit is automatisch door de overheid geregeld. U hoeft niets te doen."
       : "Deze brief is ter informatie. U hoeft niets te doen.";
 
+  // Proof-of-concept: deze pagina is opgebouwd met NL Design System-componenten
+  // (Utrecht: heading, paragraph, link, alert, button, data-list) i.p.v. eigen
+  // CSS-classes. Ze zijn via design tokens in de MijnOverheid-huisstijl gezet.
+  const buttonClass = actionable ? "utrecht-button--primary-action" : "utrecht-button--secondary-action";
   app.innerHTML = `
-    <article class="case-page plan-detail-page">
-      <a class="back-link" href="#plannen"><span aria-hidden="true">←</span> Terug naar het dossier</a>
-      <h1>${escapeHtml(task.titel?.nl ?? "Brief")}</h1>
-      <p class="page-subtitle">Brief van ${escapeHtml(org)}</p>
+    <article class="case-page plan-detail-page rhc-theme">
+      <a class="utrecht-link back-link" href="#plannen"><span aria-hidden="true">←</span> Terug naar het dossier</a>
+      <h1 class="utrecht-heading-1">${escapeHtml(task.titel?.nl ?? "Brief")}</h1>
+      <p class="utrecht-paragraph utrecht-paragraph--lead">Brief van ${escapeHtml(org)}</p>
 
       <div class="plan-detail-status">${planRowBadge(task)}</div>
 
-      ${flags.length ? `<div class="plan-detail-flag">${flags.map((f) => `<p>⚠ ${escapeHtml(f)}</p>`).join("")}</div>` : ""}
+      ${
+        flags.length
+          ? `<div class="utrecht-alert utrecht-alert--warning" role="alert">
+               <span class="utrecht-alert__icon" aria-hidden="true">⚠</span>
+               <div class="utrecht-alert__content">
+                 ${flags.map((f) => `<p class="utrecht-alert__message utrecht-paragraph">${escapeHtml(f)}</p>`).join("")}
+               </div>
+             </div>`
+          : ""
+      }
 
       <section class="case-section">
-        <h1>Wat wordt er gevraagd?</h1>
-        <p>${escapeHtml(watGevraagd)}</p>
-        ${url ? `<a class="primary-button" href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(actionable ? `Regel dit bij ${org}` : `Bekijk bij ${org}`)} <span aria-hidden="true">→</span></a>` : ""}
+        <h2 class="utrecht-heading-2">Wat wordt er gevraagd?</h2>
+        <p class="utrecht-paragraph">${escapeHtml(watGevraagd)}</p>
+        ${url ? `<p><a class="utrecht-button ${buttonClass}" href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(actionable ? `Regel dit bij ${org}` : `Bekijk bij ${org}`)}</a></p>` : ""}
       </section>
 
       <section class="case-section">
-        <h1>Over deze brief</h1>
-        <dl class="case-detail-list">
-          ${rows.map(([k, v]) => `<dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v)}</dd>`).join("")}
+        <h2 class="utrecht-heading-2">Over deze brief</h2>
+        <dl class="utrecht-data-list utrecht-data-list--rows">
+          ${rows
+            .map(
+              ([k, v]) => `
+            <div class="utrecht-data-list__item">
+              <dt class="utrecht-data-list__item-key">${escapeHtml(k)}</dt>
+              <dd class="utrecht-data-list__item-value">${escapeHtml(v)}</dd>
+            </div>`,
+            )
+            .join("")}
         </dl>
       </section>
     </article>
@@ -1892,27 +2023,30 @@ function renderPlannen() {
   const percent = totalActions ? Math.round((doneActions / totalActions) * 100) : 0;
   const autoCount = source.filter((task) => !planActionable(task) && task.automatisch).length;
 
-  // Twee aparte secties, beide een platte lijst op urgentie:
-  // nog te doen (open acties) en geen actie nodig (de rest). Organisatie staat
-  // klein onder elke titel.
-  const sorted = (tasks) => [...tasks].sort(planByUrgency);
-  const teDoen = sorted(source.filter((task) => planActionable(task) && task.status !== "afgerond"));
-  const geregeld = sorted(source.filter((task) => !(planActionable(task) && task.status !== "afgerond")));
-  const taskList = (tasks) => `<div class="plan-task-list">${tasks.map((t) => planTaskRow(t, true)).join("")}</div>`;
+  // Drie preview-boxen: elk een 'filter' op alle taken (max 3 getoond), met een
+  // "Bekijk alle taken"-link naar de overeenkomstige gefilterde MijnTaken-weergave.
+  const sorted = (pred) => source.filter(pred).sort(planByUrgency);
+  const belangrijkste = sorted(taakBelangrijkste);
+  const ingevuld = sorted(taakIngevuld);
+  const geenActie = sorted(taakGeenActie);
+
+  const previewBox = (titel, tasks, filter) => `
+    <section class="plan-preview">
+      <div class="plan-preview-head">
+        <h3 class="plan-preview-title">${escapeHtml(titel)} <span class="plannen-section-count">${tasks.length}</span></h3>
+        <a class="plan-preview-all" href="#taken/${filter}">Bekijk alle taken <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="plan-preview-list">
+        ${tasks.length ? tasks.slice(0, 3).map(planPreviewRow).join("") : `<p class="empty-line">Geen taken.</p>`}
+      </div>
+    </section>`;
 
   const sections = `
-    <section class="plannen-section">
-      <div class="plannen-section-title">Nog te doen <span class="plannen-section-count">${teDoen.length}</span></div>
-      ${teDoen.length ? taskList(teDoen) : `<p class="empty-line">Niets meer te doen — alles is geregeld.</p>`}
-    </section>
-    ${
-      geregeld.length
-        ? `<section class="plannen-section plannen-section-done">
-             <div class="plannen-section-title">Geen actie nodig <span class="plannen-section-count">${geregeld.length}</span></div>
-             ${taskList(geregeld)}
-           </section>`
-        : ""
-    }
+    <div class="plan-preview-grid">
+      ${previewBox("Belangrijkste taken", belangrijkste, "belangrijkste")}
+      ${previewBox("Ingevulde taken", ingevuld, "ingevuld")}
+      ${previewBox("Geen actie nodig", geenActie, "geen-actie")}
+    </div>
   `;
 
   let body;
@@ -1939,8 +2073,6 @@ function renderPlannen() {
 
       ${featured}
 
-      ${docs}
-
       <section class="plannen-progress" aria-label="Voortgang">
         <div class="plannen-progress-head">
           <strong>${doneActions} van ${totalActions} acties afgerond</strong>
@@ -1953,6 +2085,8 @@ function renderPlannen() {
       <section>${body}</section>
 
       ${timeline}
+
+      ${docs}
     </article>
   `;
 }
